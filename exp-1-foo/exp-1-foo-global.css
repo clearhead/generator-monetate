@@ -1,0 +1,18 @@
+/*--------------------------------------------
+ *
+ *  test name: exp-1-foo
+ *  test platform: optimizely
+
+ *  author: tom@clearhead.me
+ *  notes:
+ *    - valid for: {{urls}}
+ *    - assumes {{tbd}}
+ *
+ * ------------------------------------------*/
+
+.exp-1 {
+  /*global scope*/
+}
+.exp-1 #foo {
+  display: none;
+}
