@@ -79,12 +79,12 @@ module.exports = yeoman.generators.Base.extend({
         output: {comments:true} }).code;
       this.fs.copyTpl(
         this.templatePath('global.css'),
-        this.destinationPath(this.slug + 'global.css'),
+        this.destinationPath(this.slug + conf.name + '-global.css'),
         conf
       );
       this.fs.copyTpl(
         this.templatePath('global.js'),
-        this.destinationPath(this.slug + 'global.js'),
+        this.destinationPath(this.slug + conf.name + '-global.js'),
         conf
       );
     },
@@ -92,12 +92,12 @@ module.exports = yeoman.generators.Base.extend({
     variations: function () {
       this.fs.copyTpl(
         this.templatePath('control.js'),
-        this.destinationPath(this.slug + 'control.js'),
+        this.destinationPath(this.slug + conf.name + '-control.js'),
         conf
       );
       this.fs.copyTpl(
         this.templatePath('variation.js'),
-        this.destinationPath(this.slug + 'variation.js'),
+        this.destinationPath(this.slug + conf.name + '-variation.js'),
         conf
       );
     }
