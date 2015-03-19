@@ -1,8 +1,7 @@
-/* _optimizely_evaluate=force */ /*global $*/
 /*--------------------------------------------
  *
  *  test name: exp-1-foo
- *  test platform: optimizely
+ *  test platform: monetate
 
  *  author: tom@clearhead.me
  *  notes:
@@ -10,5 +9,10 @@
  *    - assumes {{tbd}}
  *
  * ------------------------------------------*/
- $.exp1.log('control');
-/* _optimizely_evaluate=safe */
+
+.exp-1 {
+  /*global scope*/
+}
+.exp-1 #foo {
+  display: none;
+}

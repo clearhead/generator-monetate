@@ -1,7 +1,7 @@
 /*--------------------------------------------
  *
  *  test name: <%=name%>
- *  test platform: optimizely
+ *  test platform: monetate
 <%if(plan){%> *  test plan: <%=plan%><%}%>
  *  author: <%=author%>
  *  notes:

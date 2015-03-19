@@ -3,26 +3,26 @@
   if ($ === undefined) return setTimeout(poll, 50);
   /*--------------------------------------------
    *
-   *  test name: <%=name%>
+   *  test name: exp-1-foo
    *  test platform: monetate
-<%if(plan){%>   *  test plan: <%=plan%><%}%>
-   *  author: <%=author%>
+
+   *  author: tom@clearhead.me
    *  notes:
    *    - valid for: {{urls}}
    *    - assumes {{tbd}}
    *
    * ------------------------------------------*/
-  var self = window['exp<%=idx%>'] = {};
+  var self = window['exp1'] = {};
 
   log('init');
 
-  $('html').addClass('exp-<%=idx%>');
+  $('html').addClass('exp-1');
 
   var headline = 'New Headline';
 
   $('h1').before(html(function() {
     /*
-      <div id="exp-<%=idx%>">
+      <div id="exp-1">
         {{text}}
       </div>
     */
@@ -45,7 +45,7 @@
   // log(string) ==> logs to console
   function log() {
     try {
-      window.console.log.apply(window.console, [].concat.apply(["exp<%=idx%>:"], arguments)), /chdebug/
+      window.console.log.apply(window.console, [].concat.apply(["exp1:"], arguments)), /chdebug/
         .test(location.href)
     } catch (a) {}
   };
@@ -62,7 +62,7 @@
         cid: d,
         t: "event",
         ec: location.hostname,
-        ea: "exp<%=idx%>",
+        ea: "exp1",
         el: a.toString(),
         z: (new Date).getTime()
       },

@@ -1,9 +1,9 @@
 'use strict';
-var fs = require('fs');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
-var UglifyJS = require('uglify-js');
+// var fs = require('fs');
+// var UglifyJS = require('uglify-js');
 
 var updateNotifier = require('update-notifier');
 var pkg = require('../package.json');
@@ -62,8 +62,7 @@ module.exports = yeoman.generators.Base.extend({
         name: 'exp-'+props.idx+'-'+props.name,
         idx: props.idx,
         plan: props.plan,
-        author: props.author,
-        baseFileName: (__dirname + '/templates/base.js'),
+        author: props.author
       };
       this.slug = conf.name + '/';
 
@@ -73,31 +72,17 @@ module.exports = yeoman.generators.Base.extend({
 
   writing: {
     globals: function () {
-      conf.base = fs.readFileSync(conf.baseFileName).toString();
-      conf.base = this.engine(conf.base, conf); // compile base
-      conf.base = UglifyJS.minify(conf.base, { fromString: true,
-        output: {comments:true} }).code;
       this.fs.copyTpl(
-        this.templatePath('global.css'),
-        this.destinationPath(this.slug + conf.name + '-global.css'),
-        conf
-      );
-      this.fs.copyTpl(
-        this.templatePath('global.js'),
-        this.destinationPath(this.slug + conf.name + '-global.js'),
+        this.templatePath('variation.css'),
+        this.destinationPath(this.slug + conf.name + '.css'),
         conf
       );
     },
 
     variations: function () {
       this.fs.copyTpl(
-        this.templatePath('control.js'),
-        this.destinationPath(this.slug + conf.name + '-control.js'),
-        conf
-      );
-      this.fs.copyTpl(
         this.templatePath('variation.js'),
-        this.destinationPath(this.slug + conf.name + '-variation.js'),
+        this.destinationPath(this.slug + conf.name + '.js'),
         conf
       );
     }

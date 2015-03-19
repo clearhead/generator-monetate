@@ -22,10 +22,8 @@ describe('monetate:app', function () {
 
   it('creates files', function () {
     assert.file([
-      'exp-1-bar/exp-1-bar-global.js',
-      'exp-1-bar/exp-1-bar-global.css',
-      'exp-1-bar/exp-1-bar-control.js',
-      'exp-1-bar/exp-1-bar-variation.js',
+      'exp-1-bar/exp-1-bar.css',
+      'exp-1-bar/exp-1-bar.js',
     ]);
   });
 });
