@@ -1,0 +1,18 @@
+/*--------------------------------------------
+ *
+ *  test name: <%=name%>
+ *  test platform: optimizely
+<%if(plan){%> *  test plan: <%=plan%><%}%>
+ *  author: <%=author%>
+ *  notes:
+ *    - valid for: {{urls}}
+ *    - assumes {{tbd}}
+ *
+ * ------------------------------------------*/
+
+.exp-<%=idx%> {
+  /*global scope*/
+}
+.exp-<%=idx%> #foo {
+  display: none;
+}

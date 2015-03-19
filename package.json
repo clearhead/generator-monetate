@@ -1,0 +1,38 @@
+{
+  "name": "generator-monetate",
+  "version": "0.0.3",
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "clearhead/generator-monetate",
+  "author": {
+    "name": "Clearhead Dev",
+    "email": "dev@clearhead.me",
+    "url": "https://github.com/clearhead"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "files": [
+    "app"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "chalk": "^1.0.0",
+    "uglify-js": "^2.4.17",
+    "update-notifier": "^0.3.1",
+    "yeoman-generator": "^0.18.9",
+    "yeoman-handlebars-engine": "^1.0.0",
+    "yosay": "^1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "pre-push": "git://github.com/clearhead/pre-push",
+    "which": "^1.0.9"
+  }
+}
