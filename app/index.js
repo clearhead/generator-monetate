@@ -21,7 +21,7 @@ module.exports = yeoman.generators.Base.extend({
 
     // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the cat\'s pajamas ' + chalk.red('Clearhead') + ' generator!'
+      'Welcome to the cat\'s pajamas ' + chalk.red('Clearhead Monetate') + ' generator!'
     ));
 
     var idx;
@@ -46,14 +46,6 @@ module.exports = yeoman.generators.Base.extend({
       name: 'plan',
       message: 'Test Plan Link? (optional)'
     },{
-      type: 'list',
-      name: 'analytics',
-      message: 'Analytics?',
-      choices: getFiles(__dirname + '/templates/analytics/'),
-      validate: function (input) {
-        return !!input;
-      }
-    },{
       type: 'input',
       name: 'author',
       message: 'Author?',
@@ -71,7 +63,6 @@ module.exports = yeoman.generators.Base.extend({
         idx: props.idx,
         plan: props.plan,
         author: props.author,
-        analytics: props.analytics,
         baseFileName: (__dirname + '/templates/base.js'),
       };
       this.slug = conf.name + '/';
@@ -86,13 +77,6 @@ module.exports = yeoman.generators.Base.extend({
       conf.base = this.engine(conf.base, conf); // compile base
       conf.base = UglifyJS.minify(conf.base, { fromString: true,
         output: {comments:true} }).code;
-      var analyticsName = conf.analytics;
-      var analytics = fs.readFileSync(__dirname + '/templates/analytics/' + analyticsName).toString();
-      analytics = this.engine(analytics, conf);
-      analytics = UglifyJS.minify(analytics, { fromString: true,
-        /*output: {comments:true}*/ }).code;
-      analytics = '// ' + analyticsName + '\n' + analytics;
-      conf.analytics = analytics;
       this.fs.copyTpl(
         this.templatePath('global.css'),
         this.destinationPath(this.slug + 'global.css'),
@@ -127,12 +111,7 @@ module.exports = yeoman.generators.Base.extend({
 
   end: function () {
     this.log(yosay(
-      'Thanks! ctrl+f TODO if you included any analytics.'
+      'Thanks!'
     ));
   }
 });
-
-/*jshint latedef:false*/
-function getFiles(srcpath) {
-  return fs.readdirSync(srcpath);
-}

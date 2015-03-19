@@ -6,7 +6,7 @@ var assert = require('yeoman-generator').assert;
 var helpers = require('yeoman-generator').test;
 var os = require('os');
 
-describe('clearhead:app', function () {
+describe('monetate:app', function () {
   before(function (done) {
     helpers.run(path.join(__dirname, '../app'))
       .inDir(path.join(os.tmpdir(), './temp-test'))
@@ -14,7 +14,6 @@ describe('clearhead:app', function () {
       .withPrompt({
         idx: '1',
         name: 'bar',
-        analytics: 'google-tag-manager.js',
         plan: 'http://www.example.com/plan.pdf',
         author: 'dev@clearhead.me'
       })
