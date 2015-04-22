@@ -3,7 +3,7 @@ document.documentElement.className += ' exp<%=idx%>';
 
 (function poll() {
   var $ = window.jQuery;
-  if ($ === undefined) return setTimeout(poll, 50);
+  if (!$) return setTimeout(poll, 50);
   /*--------------------------------------------
    *
    *  test name: <%=name%>
