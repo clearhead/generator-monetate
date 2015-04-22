@@ -23,7 +23,7 @@ document.documentElement.className += ' exp<%=idx%>';
 
   var headline = 'New Headline';
 
-  $('h1').before(html(function() {
+  $('h1').before(timpl(function() {
     /*
       <div id="exp<%=idx%>">
         {{text}}
@@ -31,7 +31,7 @@ document.documentElement.className += ' exp<%=idx%>';
     */
   }, {
     text: headline
-  })());
+  }));
 
   $('h2').each(function moveUp() {
     log('moved up');
@@ -73,23 +73,53 @@ document.documentElement.className += ' exp<%=idx%>';
         return b + "=" + encodeURIComponent(a)
       }).join("&")
   };
-  // htmlHereDoc(fn) ==> returns string from multiline comment function
-  function html(fn) {
-    return fn.toString().replace(/[^]+\/\*|[^\S]+\*\/[^]+|\s+(?=<)|\n|\t|\r/g, '').replace(/>\s+/g, '>');
-  };
-  // tmpl ==> handlebarsish / https://github.com/premasagar/tim
-  function tmpl() {
-    var a = /{{\s*([a-z0-9_][\\.a-z0-9_]*)\s*}}/gi;
-    return function(b, c) {
-      return b.replace(a, function(a, b) {
-        for (var d = b.split("."), e = d.length,
-            f = c, g = 0; e > g; g++) {
-          if (f = f[d[g]], void 0 === f) throw "tim: '" + d[g] +
-            "' not found in " + a;
-          if (g === e - 1) return f
-        }
-      })
+  function timpl() {
+    'use strict';
+
+    var reCommentContents = /\/\*!?(?:\@preserve)?[ \t]*(?:\r\n|\n)([\s\S]*?)(?:\r\n|\n)[ \t]*\*\//;
+    var start = '{{',
+      end = '}}',
+      path = '[a-z0-9_$][\\.a-z0-9_]*', // e.g. config.person.name
+      pattern = new RegExp(start + '\\s*(' + path + ')\\s*' + end, 'gi'),
+      undef;
+
+    function multiline(fn) {
+      var match = reCommentContents.exec(fn.toString());
+      if (!match) {
+        throw new TypeError('Multiline comment missing.');
+      }
+      return match[1];
     }
-  }();
+
+    function tim(template, data) {
+      // Merge data into the template string
+      return template.replace(pattern, function(tag, token) {
+        var path = token.split('.'),
+          len = path.length,
+          lookup = data,
+          i = 0;
+
+        for (; i < len; i++) {
+          lookup = lookup[path[i]];
+
+          // Property not found
+          if (lookup === undef) {
+            throw 'tim: "' + path[i] + '" not found in ' + tag;
+          }
+
+          // Return the required value
+          if (i === len - 1) {
+            return lookup;
+          }
+        }
+      });
+    }
+
+    return tim(
+      input.call ? multiline(input) : input,
+      data || {}
+    ).replace(/^\s+|\s+$/g,''); // trim
+
+  }
   /*jshint ignore:end*/
 })();
