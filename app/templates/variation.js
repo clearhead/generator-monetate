@@ -1,5 +1,5 @@
 
-document.documentElement.className += ' exp-<%=idx%>';
+document.documentElement.className += ' exp<%=idx%>';
 
 (function poll() {
   var $ = window.jQuery;
@@ -19,13 +19,13 @@ document.documentElement.className += ' exp-<%=idx%>';
 
   log('init');
 
-  $('html').addClass('exp-<%=idx%>');
+  $('html').addClass('exp<%=idx%>');
 
   var headline = 'New Headline';
 
   $('h1').before(html(function() {
     /*
-      <div id="exp-<%=idx%>">
+      <div id="exp<%=idx%>">
         {{text}}
       </div>
     */
